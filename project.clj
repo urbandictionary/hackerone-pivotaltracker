@@ -9,6 +9,7 @@
                  [compojure "1.5.1"]
                  [org.clojure/tools.logging "0.3.1"]]
   :min-lein-version "2.0.0"
+  :plugins [[lein-environ "0.4.0"]]
   :main ^:skip-aot hackerone-pivotaltracker.core
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all}})

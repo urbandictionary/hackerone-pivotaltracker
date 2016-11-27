@@ -9,13 +9,8 @@
    :headers {"Content-Type" "text/html"}
    :body    "hello HTTP!"})
 
-(defn get-port []
-  (if-let [e (env :port)]
-    (Integer/parseInt e)
-    8080))
-
 (defn -main
   [& args]
-  (let [port (get-port)]
+  (let [port (Integer/parseInt (env :port "8080"))]
     (log/info "Starting on port" port)
     (server/run-server app {:port port})))

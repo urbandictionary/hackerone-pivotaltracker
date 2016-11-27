@@ -9,7 +9,7 @@
 (defn app [req]
   {:status  200
    :headers {"Content-Type" "text/html"}
-   :body    "hello world!"})
+   :body    "hackerone-pivotaltracker implementation to come"})
 
 (defn tracker-post-url []
   (format "https://www.pivotaltracker.com/services/v5/projects/%s/stories" (env :pivotaltracker-project-id)))

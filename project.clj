@@ -6,8 +6,9 @@
   :dependencies [[org.clojure/clojure "1.8.0"]
                  [http-kit "2.2.0"]
                  [environ "1.1.0"]
+                 [compojure "1.5.1"]
                  [org.clojure/tools.logging "0.3.1"]]
-  :min-lein-version "2.7.1"
+  :min-lein-version "2.0.0"
   :main ^:skip-aot hackerone-pivotaltracker.core
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all}})

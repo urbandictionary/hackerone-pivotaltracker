@@ -9,7 +9,7 @@
 (defn app [req]
   {:status  200
    :headers {"Content-Type" "text/html"}
-   :body    "hello HTTP!"})
+   :body    "hello world!"})
 
 (defn tracker-post-url []
   (format "https://www.pivotaltracker.com/services/v5/projects/%s/stories" (env :pivotaltracker-project-id)))
@@ -22,6 +22,12 @@
     (if (= 200 (:status response))
       (json/read-str (:body response))
       (throw (ex-info "Request failed" response)))))
+
+(defn params->tracker [params]
+  (tracker-create {:name (:title params)
+                   :description ""
+                   :story_type "bug"
+                   :external_id "12345"}))
 
 (defn -main
   [& args]

@@ -9,7 +9,7 @@
                  [compojure "1.5.1"]
                  [org.clojure/data.json "0.2.6"]
                  [org.clojure/tools.logging "0.3.1"]]
-  :min-lein-version "2.0.0"
+  :min-lein-version "2.7.1"
   :plugins [[lein-environ "0.4.0"]]
   :main ^:skip-aot hackerone-pivotaltracker.core
   :target-path "target/%s"

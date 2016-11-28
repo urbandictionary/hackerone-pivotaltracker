@@ -11,23 +11,27 @@
    :headers {"Content-Type" "text/html"}
    :body    "hackerone-pivotaltracker implementation to come"})
 
-(defn tracker-post-url []
+(defn stories-url []
   (format "https://www.pivotaltracker.com/services/v5/projects/%s/stories" (env :pivotaltracker-project-id)))
 
-(defn tracker-create [attrs]
-  (let [options {:body    (json/write-str attrs)
-                 :headers {"Content-Type"   "application/json"
-                           "X-TrackerToken" (env :pivotaltracker-api-key)}}
-        response @(client/post (tracker-post-url) options)]
-    (if (= 200 (:status response))
-      (json/read-str (:body response))
-      (throw (ex-info "Request failed" response)))))
+(defn parse-or-throw [response]
+  (if (= 200 (:status response))
+    (json/read-str (:body response))
+    (throw (ex-info "Request failed" response))))
 
-(defn params->tracker [params]
-  (tracker-create {:name (:title params)
-                   :description ""
-                   :story_type "bug"
-                   :external_id "12345"}))
+(def tracker-request-headers
+  {"Content-Type"   "application/json"
+   "X-TrackerToken" (env :pivotaltracker-api-key)})
+
+(defn create-tracker-story [attrs]
+  (parse-or-throw @(client/post (stories-url) {:body    (json/write-str attrs)
+                                               :headers tracker-request-headers})))
+
+#_(defn params->tracker [params]
+    (create-tracker-story {:name        (:title params)
+                           :description ""
+                           :story_type  "bug"
+                           :external_id "12345"}))
 
 (defn -main
   [& args]

@@ -13,17 +13,20 @@
             [environ.core :refer [env]]
             [clojure.tools.logging :as log]))
 
+(def tracker-project-id
+  (Integer/parseInt (env :pivotaltracker-project-id)))
+
 (defn story-url [id]
-  (format "https://www.pivotaltracker.com/n/projects/%s/stories/%s" (env :pivotaltracker-project-id) id))
+  (format "https://www.pivotaltracker.com/n/projects/%d/stories/%d" tracker-project-id (Integer/parseInt id)))
 
 (def create-url
-  (format "https://www.pivotaltracker.com/services/v5/projects/%s/stories" (env :pivotaltracker-project-id)))
-
-(def tracker-request-headers
-  {"Content-Type" "application/json" "X-TrackerToken" (env :pivotaltracker-api-key)})
+  (format "https://www.pivotaltracker.com/services/v5/projects/%d/stories" tracker-project-id))
 
 (def server-opts
   {:port (Integer/parseInt (env :port "8080")) :max-line (* 1024 64)})
+
+(def tracker-request-headers
+  {"Content-Type" "application/json" "X-TrackerToken" (env :pivotaltracker-api-key)})
 
 (defn parse-response [{:keys [status body] :as response}]
   (if (= 200 status)

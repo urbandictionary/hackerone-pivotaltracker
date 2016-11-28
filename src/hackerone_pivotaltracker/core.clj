@@ -43,12 +43,24 @@
 
 (defroutes app
            (GET "/create" request
-                (-> request :params params->tracker create-tracker-story (get "url") redirect))
+                (-> request
+                    :params
+                    params->tracker
+                    create-tracker-story
+                    (get "url")
+                    redirect))
            (GET "/view" request
-                (-> request :params :id story-url redirect))
+                (-> request
+                    :params
+                    :id
+                    story-url
+                    redirect))
            (route/not-found "Not Found"))
 
 (defn -main
   [& args]
   (log/info server-opts)
-  (server/run-server (-> #'app wrap-keyword-params wrap-params wrap-reload) server-opts))
+  (server/run-server (-> #'app
+                         wrap-keyword-params
+                         wrap-params
+                         wrap-reload) server-opts))

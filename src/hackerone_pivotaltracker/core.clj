@@ -39,7 +39,7 @@
 
 (defn create-tracker-story [attrs]
   (->> {:headers (tracker-request-headers) :body (json/write-str attrs)}
-       (client/post create-url)
+       (client/post (create-url))
        deref
        parse-response))
 

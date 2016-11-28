@@ -26,7 +26,7 @@
 (defn tracker-request-headers []
   {"Content-Type" "application/json" "X-TrackerToken" (tracker-api-key)})
 
-(defn create-url
+(defn create-url []
   (format "https://www.pivotaltracker.com/services/v5/projects/%d/stories" (tracker-project-id)))
 
 (defn story-url [id]

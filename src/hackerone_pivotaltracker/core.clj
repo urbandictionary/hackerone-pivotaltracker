@@ -6,6 +6,7 @@
             [org.httpkit.client :as client]
             [clojure.data.json :as json]
             [ring.util.response :refer [redirect]]
+            [prone.middleware :refer [wrap-exceptions]]
             [ring.middleware.params :refer [wrap-params]]
             [ring.middleware.keyword-params :refer [wrap-keyword-params]]
             [ring.middleware.reload :refer [wrap-reload]]
@@ -60,7 +61,8 @@
 (defn -main
   [& args]
   (log/info server-opts)
-  (server/run-server (-> #'app
-                         wrap-keyword-params
-                         wrap-params
-                         wrap-reload) server-opts))
+  (server/run-server (cond-> #'app
+                             true wrap-keyword-params
+                             true wrap-params
+                             (env :dev) wrap-reload
+                             (env :dev) wrap-exceptions) server-opts))

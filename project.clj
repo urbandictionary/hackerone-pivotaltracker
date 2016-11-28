@@ -8,6 +8,7 @@
                  [environ "1.1.0"]
                  [compojure "1.5.1"]
                  [ring/ring-devel "1.5.0"]
+                 [prone "1.1.4"]
                  [org.clojure/data.json "0.2.6"]
                  [org.clojure/tools.logging "0.3.1"]]
   :min-lein-version "2.6.1"

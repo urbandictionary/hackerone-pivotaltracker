@@ -13,24 +13,24 @@
             [environ.core :refer [env]]
             [clojure.tools.logging :as log]))
 
-(def tracker-api-key
+(defn tracker-api-key []
   (or (env :pivotaltracker-api-key)
       (throw (RuntimeException. "Tracker API key is not set"))))
 
-(def tracker-project-id
+(defn tracker-project-id []
   (Integer/parseInt (env :pivotaltracker-project-id)))
 
 (def server-opts
   {:port (Integer/parseInt (env :port "8080")) :max-line (* 1024 64)})
 
-(def tracker-request-headers
-  {"Content-Type" "application/json" "X-TrackerToken" tracker-api-key})
+(defn tracker-request-headers []
+  {"Content-Type" "application/json" "X-TrackerToken" (tracker-api-key)})
 
-(def create-url
-  (format "https://www.pivotaltracker.com/services/v5/projects/%d/stories" tracker-project-id))
+(defn create-url
+  (format "https://www.pivotaltracker.com/services/v5/projects/%d/stories" (tracker-project-id)))
 
 (defn story-url [id]
-  (format "https://www.pivotaltracker.com/n/projects/%d/stories/%d" tracker-project-id (Integer/parseInt id)))
+  (format "https://www.pivotaltracker.com/n/projects/%d/stories/%d" (tracker-project-id) (Integer/parseInt id)))
 
 (defn parse-response [{:keys [status body] :as response}]
   (if (= 200 status)
@@ -38,7 +38,7 @@
     (throw (ex-info "Request failed" response))))
 
 (defn create-tracker-story [attrs]
-  (->> {:headers tracker-request-headers :body (json/write-str attrs)}
+  (->> {:headers (tracker-request-headers) :body (json/write-str attrs)}
        (client/post create-url)
        deref
        parse-response))

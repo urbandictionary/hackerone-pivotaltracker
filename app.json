@@ -1,4 +1,14 @@
 {
   "name": "HackerOne/PivotalTracker",
-  "repository": "https://github.com/urbandictionary/hackerone-pivotaltracker.git"
+  "repository": "https://github.com/urbandictionary/hackerone-pivotaltracker.git",
+  "env": {
+    "PIVOTALTRACKER_API_KEY": {
+      "description": "Pivotal Tracker API key from https://www.pivotaltracker.com/profile",
+      "required": true
+    },
+    "PIVOTALTRACKER_PROJECT_ID": {
+      "description": "Pivotal Tracker Project ID from https://www.pivotaltracker.com/n/projects/PROJECT_ID",
+      "required": true
+    }
+  }
 }

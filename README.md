@@ -1,10 +1,14 @@
 # Escalate HackerOne Reports to Pivotal Tracker
 
-1. Deploy your own copy to Heroku:
+## 1
+
+Deploy your own copy to Heroku:
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/urbandictionary/hackerone-pivotaltracker)
 
-2. Email support@hackerone.com:
+## 2
+
+Email support@hackerone.com:
 
 ```
 Hello,
@@ -17,6 +21,10 @@ https://YOUR-HEROKU-APP-NAME.herokuapp.com/view?id=[id]
 Thank you!
 ```
 
-3. On a HackerOne Report, choose Change State > Triaged, then click Escalate
+## 3
 
-4. After the Pivotal Tracker story is created, paste the Pivotal Tracker story ID into the "Reference ID" input box on the HackerOne Report.
+On a HackerOne Report, choose Change State > Triaged, then click Escalate
+
+## 4
+
+After the Pivotal Tracker story is created, paste the Pivotal Tracker story ID into the "Reference ID" input box on the HackerOne Report.

@@ -10,9 +10,11 @@
                  [ring/ring-devel "1.5.0"]
                  [prone "1.1.4"]
                  [org.clojure/data.json "0.2.6"]
-                 [org.clojure/tools.logging "0.3.1"]]
+                 [org.clojure/tools.logging "0.3.1"]
+                 [midje "1.8.3"]]
   :min-lein-version "2.6.1"
-  :plugins [[lein-environ "1.1.0"]]
+  :plugins [[lein-environ "1.1.0"]
+            [lein-midje "3.2.1"]]
   :main ^:skip-aot hackerone-pivotaltracker.core
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all}})

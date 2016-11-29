@@ -55,5 +55,5 @@
                                                 {:body "" :headers {"Location" "http://example.com/"} :status 302}))
 
                           (fact "/view redirects to the URL of an existing story"
-                                ((-> app wrap-keyword-params wrap-params) (mock/request :get "/view" {:id 5})) =>
+                                (app (mock/request :get "/view" {:id 5})) =>
                                 {:body "" :headers {"Location" "https://www.pivotaltracker.com/n/projects/1234/stories/5"} :status 302})))

@@ -1,6 +1,6 @@
 (ns hackerone-pivotaltracker.core
   (:gen-class)
-  (:require [compojure.core :refer :all]
+  (:require [compojure.core :refer [GET defroutes]]
             [compojure.route :as route]
             [org.httpkit.server :as server]
             [org.httpkit.client :as client]
@@ -49,7 +49,7 @@
    :labels      [{:name "hackerone"}]
    :story_type  "bug"})
 
-(defroutes app
+(defroutes routes
            (GET "/create" request
                 (-> request
                     :params
@@ -65,11 +65,14 @@
                     redirect))
            (route/not-found "Not Found"))
 
+(def app
+  (cond-> #'routes
+          true wrap-keyword-params
+          true wrap-params
+          (env :dev) wrap-reload
+          (env :dev) wrap-exceptions))
+
 (defn -main
   [& args]
   (log/info server-opts)
-  (server/run-server (cond-> #'app
-                             true wrap-keyword-params
-                             true wrap-params
-                             (env :dev) wrap-reload
-                             (env :dev) wrap-exceptions) server-opts))
+  (server/run-server app server-opts))

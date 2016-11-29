@@ -31,4 +31,15 @@
                                :body   "{\"a\":\"b\"}"}]
                              (create-tracker-story {:foo "bar"}) => {"a" "b"}
                              (provided (env :pivotaltracker-project-id) => "1234")
+                             (provided (env :pivotaltracker-api-key) => "foobar")))
+
+       (fact "raises when response is an error"
+             (with-fake-http [{:url    "https://www.pivotaltracker.com/services/v5/projects/1234/stories"
+                               :headers {"Content-Type" "application/json" "X-TrackerToken" "foobar"}
+                               :method :post}
+                              {:status 400
+                               :body   "{\"a\":\"b\"}"}]
+                             (create-tracker-story {:foo "bar"}) => (throws clojure.lang.ExceptionInfo "Request failed")
+                             (provided (env :pivotaltracker-project-id) => "1234")
                              (provided (env :pivotaltracker-api-key) => "foobar"))))
+

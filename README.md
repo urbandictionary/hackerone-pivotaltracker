@@ -1,5 +1,7 @@
 # Escalate HackerOne Reports to Pivotal Tracker
 
+This Heroku app lets you click "Escalate" on a HackerOne Report and add it as a bug to Pivotal Tracker.
+
 ## Step 1
 
 Deploy your own copy to Heroku:
@@ -27,4 +29,4 @@ On a HackerOne Report, choose Change State > Triaged, then click Escalate
 
 ## Step 4
 
-After the Pivotal Tracker story is created, paste the Pivotal Tracker story ID into the "Reference ID" input box on the HackerOne Report.
+After the Pivotal Tracker story is created, paste the Pivotal Tracker story ID into the "Reference ID" input box on the HackerOne Report. That is necessary for the "View" link.

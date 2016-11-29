@@ -32,3 +32,25 @@ On a HackerOne Report, choose Change State > Triaged, then click Escalate
 ## Step 4
 
 After the Pivotal Tracker story is created, paste the Pivotal Tracker story ID into the "Reference ID" input box on the HackerOne Report. That is necessary for the "View" link.
+
+---
+
+# Development
+
+## Run tests
+
+`lein midje :autotest`
+
+## Set up development
+
+cat >profiles.clj
+
+```
+{:dev {:env {:dev                       "true"
+             :pivotaltracker-api-key    "aaaaaaa"
+             :pivotaltracker-project-id "11111111"}}}
+```
+
+## Run locally
+
+`lein run`, then open http://localhost:8080/create?id=183837&url=https%3A%2F%2Fhackerone.com%2Freports%2F1111&title=Race+condition&details=foobar

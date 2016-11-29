@@ -53,4 +53,4 @@ cat >profiles.clj
 
 ## Run locally
 
-`lein run`, then open http://localhost:8080/create?id=183837&url=https%3A%2F%2Fhackerone.com%2Freports%2F1111&title=Race+condition&details=foobar
+`lein run`, then open `http://localhost:8080/create?id=183837&url=https%3A%2F%2Fhackerone.com%2Freports%2F1111&title=Race+condition&details=foobar`

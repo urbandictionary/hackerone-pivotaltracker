@@ -23,6 +23,8 @@ https://YOUR-HEROKU-APP-NAME.herokuapp.com/view?id=[id]
 Thank you!
 ```
 
+Wait for hackerone to confirm that the integration was added.
+
 ## Step 3
 
 On a HackerOne Report, choose Change State > Triaged, then click Escalate

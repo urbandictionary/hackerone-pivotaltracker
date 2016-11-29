@@ -43,3 +43,5 @@
                              (provided (env :pivotaltracker-project-id) => "1234")
                              (provided (env :pivotaltracker-api-key) => "foobar"))))
 
+(fact "params->tracker"
+      (params->tracker {:title "a" :details "b"}) => {:description "b" :labels [{:name "hackerone"}] :name "a" :story_type "bug"})

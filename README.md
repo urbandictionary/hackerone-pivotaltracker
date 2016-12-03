@@ -17,8 +17,8 @@ Hello,
 
 I'd like to add a custom escalation integration with these URLs:
 
-https://YOUR-HEROKU-APP-NAME.herokuapp.com/create?id=[report id]&url=[report url]&title=[title]&details=[details]
-https://YOUR-HEROKU-APP-NAME.herokuapp.com/view?id=[id]
+https://YOUR-HEROKU-APP-NAME.herokuapp.com/create?id=[report id]&url=[report url]&title=[title]&details=[details]&secret=[app-secret-key]
+https://YOUR-HEROKU-APP-NAME.herokuapp.com/view?id=[id]&secret=[app-secret-key]
 
 Thank you!
 ```
@@ -48,9 +48,10 @@ cat >profiles.clj
 ```
 {:dev {:env {:dev                       "true"
              :pivotaltracker-api-key    "aaaaaaa"
-             :pivotaltracker-project-id "11111111"}}}
+             :pivotaltracker-project-id "11111111"
+             :app-secret-key            "secret"}}}
 ```
 
 ## Run locally
 
-`lein run`, then open `http://localhost:8080/create?id=183837&url=https%3A%2F%2Fhackerone.com%2Freports%2F1111&title=Race+condition&details=foobar`
+`lein run`, then open `http://localhost:8080/create?id=183837&url=https%3A%2F%2Fhackerone.com%2Freports%2F1111&title=Race+condition&details=foobar&secret=[app-secrey-key-from-profiles.clj]`

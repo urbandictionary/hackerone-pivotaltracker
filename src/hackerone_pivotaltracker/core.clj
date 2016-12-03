@@ -6,6 +6,7 @@
             [org.httpkit.client :as client]
             [clojure.data.json :as json]
             [ring.util.response :refer [redirect]]
+            [ring.util.response :refer [status]]
             [prone.middleware :refer [wrap-exceptions]]
             [ring.middleware.params :refer [wrap-params]]
             [ring.middleware.keyword-params :refer [wrap-keyword-params]]
@@ -17,6 +18,10 @@
 (defn tracker-api-key []
   (or (env :pivotaltracker-api-key)
       (throw (RuntimeException. "Tracker API key is not set"))))
+
+(defn app-secret-key []
+  (or (env :app-secret-key)
+      (throw (RuntimeException. "Application Secret key is not set"))))
 
 (defn tracker-project-id []
   (Integer/parseInt (env :pivotaltracker-project-id)))
@@ -66,8 +71,18 @@
                     redirect))
            (route/not-found "Not Found"))
 
+(defn verify-app-secret [app]
+ (fn [req]
+   (if (crypto/eq? (get-in req [:params :secret]) (app-secret-key)) (app req) (status req 403))))
+
 (def app
   (cond-> #'routes
+          ;; note: verify-app-secret has to be loaded after the
+          ;; wrap-keyword-params and wrap-params middleware due
+          ;; to the `params` dependency in verify-app-secret
+          ;; middleware, changing the order here will cause the
+          ;; get-in to return nil without a hard fail.
+          true verify-app-secret
           true wrap-keyword-params
           true wrap-params
           (env :dev) wrap-reload

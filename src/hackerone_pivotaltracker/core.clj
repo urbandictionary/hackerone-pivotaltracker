@@ -21,7 +21,7 @@
 
 (defn app-secret-key []
   (or (env :app-secret-key)
-      (throw (RuntimeException. "Application Secret key is not set"))))
+      (throw (RuntimeException. "Application secret key is not set"))))
 
 (defn tracker-project-id []
   (Integer/parseInt (env :pivotaltracker-project-id)))

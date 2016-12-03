@@ -11,7 +11,8 @@
             [ring.middleware.keyword-params :refer [wrap-keyword-params]]
             [ring.middleware.reload :refer [wrap-reload]]
             [environ.core :refer [env]]
-            [clojure.tools.logging :as log]))
+            [clojure.tools.logging :as log]
+            [crypto.equality :as crypto]))
 
 (defn tracker-api-key []
   (or (env :pivotaltracker-api-key)

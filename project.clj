@@ -13,7 +13,8 @@
                  [prone "1.1.4"]
                  [org.clojure/data.json "0.2.6"]
                  [org.clojure/tools.logging "0.3.1"]
-                 [midje "1.8.3"]]
+                 [midje "1.8.3"]
+                 [crypto-equality "1.0.0"]]
   :min-lein-version "2.6.1"
   :plugins [[lein-environ "1.1.0"]
             [lein-midje "3.2.1"]]

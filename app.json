@@ -9,6 +9,10 @@
     "PIVOTALTRACKER_PROJECT_ID": {
       "description": "Pivotal Tracker Project ID from https://www.pivotaltracker.com/n/projects/PROJECT_ID",
       "required": true
+    },
+    "APP_SECRET_KEY": {
+      "description": "A random secret only known to you and HackerOne to avoid creation of unwanted tickets in Pivotal Tracker",
+      "required": true
     }
   }
 }
